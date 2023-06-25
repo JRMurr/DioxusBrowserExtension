@@ -3,16 +3,26 @@ rustPlatform.buildRustPackage rec {
   pname = "dioxus-cli";
   version = "0.3.2";
 
-  src = pkgs.fetchCrate {
-    inherit pname version;
-    sha256 = "sha256-8S8zUOb2oiXbJQRgY/g9H2+EW+wWOQugr8+ou34CYPg=";
+  # need to fetch from source + update the cargo lock to fix https://github.com/DioxusLabs/dioxus/issues/1101
+  # `cargo install --git` ignores the lock but nix needs it
+  cargoPatches = [ ./update-dixous-lock.patch ];
+  src = pkgs.fetchFromGitHub {
+    owner = "DioxusLabs";
+    repo = "cli";
+    rev = "5f35fa6e16886c8eb71814d98f193ab1e3d0c1fc";
+    sha256 = "sha256-dCYUECAIhC7oKxNnnU6sxslIEqIvpcBb7RDtIPusQiw=";
   };
+
+  # src = pkgs.fetchCrate {
+  #   inherit pname version;
+  #   sha256 = "sha256-8S8zUOb2oiXbJQRgY/g9H2+EW+wWOQugr8+ou34CYPg=";
+  # };
 
   nativeBuildInputs = with pkgs; [ pkg-config ];
   buildInputs = with pkgs;
     [ openssl ] ++ pkgs.lib.optionals stdenv.isDarwin [ CoreServices ];
 
-  cargoSha256 = "sha256-sCP8njwYA29XmYu2vfuog0NCL1tZlsZiupkDVImrYCE=";
+  cargoSha256 = "sha256-dw5zYLxtLrBFbOcESji4/9HmbZVXUPeE++8hQdxjSco=";
 
   doCheck = false;
 }

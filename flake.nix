@@ -22,16 +22,34 @@
           inherit pkgs;
           rustPlatform = rustAttrs.rustPlatform;
         };
+
+        buildDeps = with pkgs; [
+          pkg-config
+          openssl
+          cargo-generate
+          glib
+          # https://gist.github.com/FruitieX/73afe3eb15da45e0e05d5c9cf5d318fc
+          # cairo
+          # pango
+          # atk
+          # gdk-pixbuf
+          # libsoup
+          # gtk3
+          # libappindicator
+          # webkitgtk
+        ];
+
       in {
         formatter = pkgs.nixpkgs-fmt;
         devShells = {
           default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              rustAttrs.rust-shell
-              dioxus-cli
-              # common
-              just
-            ];
+            buildInputs = with pkgs;
+              [
+                rustAttrs.rust-shell
+                dioxus-cli
+                # common
+                just
+              ] ++ buildDeps;
           };
         };
 
