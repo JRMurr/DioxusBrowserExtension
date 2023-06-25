@@ -1,0 +1,13 @@
+{
+    "eval": {
+        "target": {
+            "args": [
+                "-f",
+                "default.nix"
+            ],
+            "installable": "devShells.x86_64-linux",
+            "depth": 20,
+            "workers": 4
+        }
+    }
+}
