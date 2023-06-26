@@ -56,20 +56,16 @@ checksum = "9c7d0618f0e0b7e8ff11427422b64564d5fb0be1940354bfe2e0529b18a9d9b8"
 name = "app"
 version = "0.1.0"
 dependencies = [
+ "browser_apis",
  "console_error_panic_hook",
  "dioxus",
  "dioxus-logger",
  "dioxus-web",
- "gloo-utils",
- "js-sys",
  "log",
  "miette",
  "serde",
  "serde_json",
- "wasm-bindgen",
  "wasm-logger",
- "web-extensions",
- "web-extensions-sys",
 ]
 
 [[package]]
@@ -140,6 +136,20 @@ dependencies = [
  "fastrand",
  "futures-lite",
  "log",
+]
+
+[[package]]
+name = "browser_apis"
+version = "0.1.0"
+dependencies = [
+ "dioxus-logger",
+ "gloo-utils",
+ "js-sys",
+ "miette",
+ "serde",
+ "serde_json",
+ "wasm-bindgen",
+ "web-extensions-sys",
 ]
 
 [[package]]
@@ -1451,23 +1461,6 @@ dependencies = [
  "log",
  "wasm-bindgen",
  "web-sys",
-]
-
-[[package]]
-name = "web-extensions"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "897596c36e6f5d428cfd0ad24e66862d0f27ca26d5429661fe66845fb1b3add6"
-dependencies = [
- "gloo-utils",
- "js-sys",
- "serde",
- "serde_derive",
- "serde_json",
- "thiserror",
- "wasm-bindgen",
- "wasm-bindgen-futures",
- "web-extensions-sys",
 ]
 
 [[package]]

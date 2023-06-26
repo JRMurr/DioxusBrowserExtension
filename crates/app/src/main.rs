@@ -1,8 +1,6 @@
 use dioxus::prelude::*;
 use log::{info, LevelFilter};
 
-mod utils;
-
 fn main() {
     // init debug tool for WebAssembly
     dioxus_logger::init(LevelFilter::Info).expect("failed to init logger");
@@ -15,16 +13,17 @@ fn main() {
 fn app(cx: Scope) -> Element {
     info!("hi");
     let future = use_future(cx, (), |_| async move {
-        let res =
-            utils::query(serde_json::json!({ "active": true, "lastFocusedWindow": true })).await;
-        info!("got: {:?}", res);
+        browser_apis::query(serde_json::json!({ "active": true, "lastFocusedWindow": true }))
+            .await
+            .unwrap()
     });
     cx.render(rsx! (
         div {
             style: "text-align: center;",
             h1 { "🌗 Dioxus 🚀" }
-            h3 { "Frontend that slaps." }
+            h3 { "Frontend that slapszzz." }
             p { "Dioxus is a portable, performant, and ergonomic framework for building cross-platform user interfaces in Rust." }
+            div { "{future.value():?}" }
         }
     ))
 }
