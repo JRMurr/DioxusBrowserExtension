@@ -3,8 +3,9 @@ use js_sys::Object;
 use miette::{IntoDiagnostic, Result};
 use wasm_bindgen::prelude::*;
 use web_extensions_sys as sys;
-// TODO: stolen from https://github.com/web-extensions-rs/web-extensions/blob/main/src/util.rs
-// move to different crate
+
+// stolen from https://github.com/web-extensions-rs/web-extensions/blob/main/src/util.rs
+
 pub(crate) fn js_from_serde<T: serde::Serialize>(v: &T) -> Result<JsValue> {
     JsValue::from_serde(v).into_diagnostic()
 }
@@ -21,7 +22,6 @@ pub(crate) fn serde_from_js_result<T>(v: Result<JsValue, JsValue>) -> Result<T>
 where
     T: for<'a> serde::Deserialize<'a>,
 {
-    // Ok(v.into_diagnostic()?.into_serde())
     match v {
         Ok(res) => res.into_serde().into_diagnostic(),
         Err(err) => miette::bail!("SAD!: {:?}", err),

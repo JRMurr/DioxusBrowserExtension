@@ -37,6 +37,7 @@
           # gtk3
           # libappindicator
           # webkitgtk
+          nodePackages.tailwindcss
         ];
 
       in {
