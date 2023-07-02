@@ -4,4 +4,4 @@ default:
     @just --list
 
 run:
-    cd crates/app && dioxus serve
+    cd crates/app && dioxus serve --verbose

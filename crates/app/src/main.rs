@@ -19,14 +19,19 @@ fn app(cx: Scope) -> Element {
             .unwrap()
     });
     cx.render(rsx!(
-        div {
+        div { class:"text-gray-400 bg-gray-900 body-font",
             // style: "text-align: center;",
             // stream_info {account: "test name"}
-            // div { "{future.value():?}" }
+            div { "{future.value():?}" }
 
-            ul { class:"text-gray-400 bg-gray-900 body-font",
-                li { class: "pb-3 sm:pb-4",
+            h1 { "streams" }
+
+            ul {
+                li {
                     stream_info {account: "test name"}
+                }
+                li { class: "pb-3 sm:pb-4",
+                    stream_info {account: "fart"}
                 }
             }
         }

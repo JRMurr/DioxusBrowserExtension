@@ -28,12 +28,12 @@ where
     }
 }
 
-pub(crate) fn serde_from_js<T>(v: JsValue) -> Result<T>
-where
-    T: for<'a> serde::Deserialize<'a>,
-{
-    v.into_serde().into_diagnostic()
-}
+// pub(crate) fn serde_from_js<T>(v: JsValue) -> Result<T>
+// where
+//     T: for<'a> serde::Deserialize<'a>,
+// {
+//     v.into_serde().into_diagnostic()
+// }
 
 /// <https://developer.chrome.com/docs/extensions/reference/tabs/#method-query>
 pub async fn query(details: serde_json::Value) -> Result<Vec<serde_json::Value>> {
