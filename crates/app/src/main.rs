@@ -30,7 +30,7 @@ fn app(cx: Scope) -> Element {
                 li {
                     stream_info {account: "test name"}
                 }
-                li { class: "pb-3 sm:pb-4",
+                li {
                     stream_info {account: "fart"}
                 }
             }

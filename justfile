@@ -4,4 +4,4 @@ default:
     @just --list
 
 run:
-    cd crates/app && dioxus serve --verbose
+    cd crates/app && dioxus serve --hot-reload
