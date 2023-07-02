@@ -1,7 +1,7 @@
 use dioxus::prelude::*;
 use log::LevelFilter;
 
-use crate::components::steam_info::stream_info;
+use crate::components::{selected_stream::selected_stream, steam_info::stream_info};
 
 mod components;
 
@@ -20,20 +20,29 @@ fn app(cx: Scope) -> Element {
     });
     cx.render(rsx!(
         div { class:"text-gray-400 bg-gray-900 body-font",
-            // style: "text-align: center;",
-            // stream_info {account: "test name"}
-            div { "{future.value():?}" }
 
             h1 { "streams" }
 
-            ul {
-                li {
-                    stream_info {account: "test name"}
+            div { class: "grid grid-cols-3 gap-4",
+                ul { class: "col-span-1",
+                    li {
+                        stream_info {account: "test name"}
+                    }
+                    li {
+                        stream_info {account: "fart"}
+                    }
                 }
-                li {
-                    stream_info {account: "fart"}
+
+                ul { class: "col-span-1 col-start-3",
+                    li {
+                        selected_stream {account: "test name"}
+                    }
+                    li {
+                        selected_stream {account: "fart"}
+                    }
                 }
             }
+
         }
     ))
 }
