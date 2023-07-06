@@ -1,7 +1,7 @@
 use browser_apis::tab::TabId;
 use miette::Result;
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub struct StreamTab {
     pub id: TabId,
     pub channel: String,

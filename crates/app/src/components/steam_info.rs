@@ -10,7 +10,7 @@ pub fn stream_info<'a>(cx: Scope<'a, StreamInfoProps<'a>>) -> Element {
         rsx!(div { 
             button {
                 class: "text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg",
-                "fart11: {cx.props.account}"
+                "{cx.props.account}"
             }
         }),
     )

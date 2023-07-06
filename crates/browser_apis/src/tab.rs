@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+use derive_more::Display;
 use miette::Result;
 use serde::{Deserialize, Serialize};
 use url::Url;
@@ -12,7 +13,7 @@ use crate::{js_from_serde, object_from_js, serde_from_js_result};
 /// The ID of the tab.
 ///
 /// Tab IDs are unique within a browser session.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Display)]
 pub struct TabId(i32);
 
 /// <https://developer.chrome.com/docs/extensions/reference/tabs/#type-Tab>
