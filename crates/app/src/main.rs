@@ -1,9 +1,13 @@
 use dioxus::prelude::*;
 use log::LevelFilter;
 
-use crate::components::{selected_stream::selected_stream, steam_info::stream_info};
+use crate::{
+    components::{selected_stream::selected_stream, steam_info::stream_info},
+    twitch::get_twitch_tabs,
+};
 
 mod components;
+mod twitch;
 
 fn main() {
     dioxus_logger::init(LevelFilter::Info).expect("failed to init logger");
@@ -13,11 +17,8 @@ fn main() {
 }
 
 fn app(cx: Scope) -> Element {
-    let future = use_future(cx, (), |_| async move {
-        browser_apis::query(serde_json::json!({ "active": true, "lastFocusedWindow": true }))
-            .await
-            .unwrap()
-    });
+    let future = use_future(cx, (), |_| async move { get_twitch_tabs().await });
+    log::info!("fut: {:#?}", future.value());
     cx.render(rsx!(
         div { class:"text-gray-400 bg-gray-900 body-font",
 

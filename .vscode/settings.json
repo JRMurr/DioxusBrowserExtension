@@ -3,4 +3,7 @@
     "tailwindCSS.includeLanguages": {
         "rust": "html"
     },
+    "rust-analyzer.linkedProjects": [
+        "./crates/browser_apis/Cargo.toml"
+    ],
 }

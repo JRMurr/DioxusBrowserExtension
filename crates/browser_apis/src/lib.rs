@@ -2,7 +2,7 @@ use gloo_utils::format::JsValueSerdeExt;
 use js_sys::Object;
 use miette::{IntoDiagnostic, Result};
 use wasm_bindgen::prelude::*;
-use web_extensions_sys as sys;
+pub mod tab;
 
 // stolen from https://github.com/web-extensions-rs/web-extensions/blob/main/src/util.rs
 
@@ -34,13 +34,3 @@ where
 // {
 //     v.into_serde().into_diagnostic()
 // }
-
-/// <https://developer.chrome.com/docs/extensions/reference/tabs/#method-query>
-pub async fn query(details: serde_json::Value) -> Result<Vec<serde_json::Value>> {
-    let js_details = js_from_serde(&details)?;
-    let result = sys::chrome()
-        .tabs()
-        .query(object_from_js(&js_details)?)
-        .await;
-    serde_from_js_result(result)
-}
