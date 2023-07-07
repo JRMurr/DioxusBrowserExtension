@@ -1,3 +1,3 @@
 pub mod selected_stream;
 pub mod steam_info;
-pub mod tab_list;
+pub mod stream_list;
