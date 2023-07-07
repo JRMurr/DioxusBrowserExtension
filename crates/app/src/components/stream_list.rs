@@ -34,21 +34,29 @@ pub fn stream_list(cx: Scope<'_, StreamListProps>) -> Element {
             .collect()
     });
 
-    let rendered_tabs = selectable_streams
-        .iter()
-        .map(|SelectableStream { stream, selected }| {
+    let rendered_tabs = selectable_streams.iter().enumerate().map(
+        |(idx, SelectableStream { stream, selected })| {
             rsx!(li { key: "{stream.id}",
-                stream_info {account: "{stream.channel}"}
-            })
-        });
-
-    let rendered_selected_stream = selectable_streams.iter().filter(|v| v.selected).map(
-        |SelectableStream { stream, selected }| {
-            rsx!(li { key: "{stream.id}",
-                selected_stream {account: "{stream.channel}"}
+                stream_info {account: "{stream.channel}", selected: *selected,
+                on_click: move |_event| selectable_streams.modify(|streams| {
+                    // TODO: switch to use ref https://dioxuslabs.com/docs/0.3/guide/en/interactivity/hooks.html#use_ref-hook
+                    let mut new_streams = streams.to_owned();
+                    new_streams[idx].selected = !new_streams[idx].selected;
+                    new_streams
+                })}
             })
         },
     );
+
+    let rendered_selected_stream = selectable_streams // TODO: if none selected put dummy text there
+        .iter()
+        .enumerate()
+        .filter(|(_idx, v)| v.selected)
+        .map(|(_idx, SelectableStream { stream, .. })| {
+            rsx!(li { key: "{stream.id}",
+                selected_stream {account: "{stream.channel}"}
+            })
+        });
 
     cx.render(rsx!(div { class: "grid grid-cols-3 gap-4",
 
